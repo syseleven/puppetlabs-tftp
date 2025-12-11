@@ -28,19 +28,19 @@
 #   }
 #
 define tftp::file (
-  $ensure       = file,
-  $owner        = undef,
-  $group        = undef,
-  $mode         = '0644',
-  $recurse      = false,
-  $purge        = undef,
-  $replace      = undef,
-  $recurselimit = undef,
-  $content      = undef,
-  $source       = undef
+  Stdlib::Ensure::File $ensure       = file,
+  Optional[String] $owner        = undef,
+  Optional[String] $group        = undef,
+  Stdlib::Filemode $mode         = '0644',
+  Boolean          $recurse      = false,
+  Optional[String] $purge        = undef,
+  Optional[String] $replace      = undef,
+  Optional[String] $recurselimit = undef,
+  Optional[String] $content      = undef,
+  Optional[String] $source       = undef
 ) {
-  include 'tftp'
-  include 'tftp::params'
+  include tftp
+  include tftp::params
 
   if $owner {
     $tftp_owner = $owner
